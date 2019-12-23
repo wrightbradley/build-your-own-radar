@@ -1,16 +1,19 @@
-[![Build Status](https://travis-ci.org/thoughtworks/build-your-own-radar.svg?branch=release)](https://travis-ci.org/thoughtworks/build-your-own-radar)
+[![Build Status](https://travis-ci.org/thoughtworks/build-your-own-radar.svg?branch=master)](https://travis-ci.org/thoughtworks/build-your-own-radar)
+[![Stars](https://badgen.net/github/stars/thoughtworks/build-your-own-radar)](https://github.com/thoughtworks/build-your-own-radar)
 [![dependencies Status](https://david-dm.org/thoughtworks/build-your-own-radar/status.svg)](https://david-dm.org/thoughtworks/build-your-own-radar)
 [![devDependencies Status](https://david-dm.org/thoughtworks/build-your-own-radar/dev-status.svg)](https://david-dm.org/thoughtworks/build-your-own-radar?type=dev)
 [![peerDependencies Status](https://david-dm.org/thoughtworks/build-your-own-radar/peer-status.svg)](https://david-dm.org/thoughtworks/build-your-own-radar?type=peer)
 [![Docker Hub Pulls](https://img.shields.io/docker/pulls/wwwthoughtworks/build-your-own-radar.svg)](https://hub.docker.com/r/wwwthoughtworks/build-your-own-radar)
+[![GitHub contributors](https://badgen.net/github/contributors/thoughtworks/build-your-own-radar?color=cyan)](https://github.com/thoughtworks/build-your-own-radar/graphs/contributors)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![AGPL License](https://badgen.net/github/license/thoughtworks/build-your-own-radar)](https://github.com/thoughtworks/build-your-own-radar)
 
 
 A library that generates an interactive radar, inspired by [thoughtworks.com/radar](http://thoughtworks.com/radar).
 
 ## Demo
 
-You can see this in action at https://radar.thoughtworks.com. If you plug in [this data](https://docs.google.com/spreadsheets/d/1YXkrgV7Y6zShiPeyw4Y5_19QOfu5I6CyH5sGnbkEyiI/) you'll see [this visualization](https://radar.thoughtworks.com/?sheetId=1YXkrgV7Y6zShiPeyw4Y5_19QOfu5I6CyH5sGnbkEyiI). 
+You can see this in action at https://radar.thoughtworks.com. If you plug in [this data](https://docs.google.com/spreadsheets/d/1YXkrgV7Y6zShiPeyw4Y5_19QOfu5I6CyH5sGnbkEyiI/) you'll see [this visualization](https://radar.thoughtworks.com/?sheetId=https://docs.google.com/spreadsheets/d/1YXkrgV7Y6zShiPeyw4Y5_19QOfu5I6CyH5sGnbkEyiI). 
 
 ## How To Use
 
@@ -50,7 +53,7 @@ Apache Kylin,assess,platforms,TRUE,"Apache Kylin is an open source analytics sol
 JSF,hold,languages & frameworks,FALSE,"We continue to see teams run into trouble using JSF ..."  
 ```
 
-Note: The CSV file parsing is using D3 library, so consult the D3 documentation for the data format details.
+***Note:*** The CSV file parsing is using D3 library, so consult the D3 documentation for the data format details.
 
 ### Building the radar
 
@@ -58,7 +61,8 @@ Paste the URL in the input field on the home page.
 
 That's it!
 
-Note: the quadrants of the radar, and the order of the rings inside the radar will be drawn in the order they appear in your data.
+***Note:*** The quadrants of the radar, and the order of the rings inside the radar will be drawn in the order they appear in your data.
+
 
 ### More complex usage
 
@@ -89,8 +93,24 @@ Make sure you have nodejs installed.
 - `npm test` - to run your tests
 - `npm run dev` - to run application in localhost:8080. This will watch the .js and .css files and rebuild on file changes
 
+***Note***: If you are facing google authentication error, need to set the `Google API_KEY` and `OAuth CLIENT_ID` before starting the app server. To bypass this add `SKIP_GOOGLE_AUTH=true` ENV variable along with `npm run dev`.
+
+To run End to End tests in headless mode
+- add a new environment variable 'TEST_URL' and set it to 'http://localhost:8080/'
+- `npm run end_to_end_test`
+
+To run End to End tests in debug mode
+- add a new environment variable 'TEST_URL' and set it to 'http://localhost:8080/'
+- `npm run start`
+- Click on 'Run all specs' in cypress window
+
 ### Don't want to install node? Run with one line docker
 
-     $ docker run -p 8080:8080 -v $PWD:/app -w /app -it node:10.14.2 /bin/sh -c 'npm install && npm run dev'
+     $ docker run -p 8080:8080 -v $PWD:/app -w /app -it node:10.15.3 /bin/sh -c 'npm install && npm run dev'
 
-After building it will start on localhost:8080
+***Note***: If you are facing Node-sass compile error while running, please prefix the command `npm rebuild node-sass` before `npm run dev`. like this
+```
+npm install && npm rebuild node-sass && npm run dev
+```
+
+After building it will start on `localhost:8080`
